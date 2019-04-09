@@ -1,1 +1,1 @@
-# SUVoting
+Student Union Voting Website
