@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ConfirmVote index{% endblock %}
+
+{% block body %}
+    <h1>ConfirmVote index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for confirm_vote in confirm_votes %}
+            <tr>
+                <td>{{ confirm_vote.id }}</td>
+                <td>{{ confirm_vote.Title }}</td>
+                <td>{{ confirm_vote.Description }}</td>
+                <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('confirm_vote_show', {'id': confirm_vote.id}) }}">show</a>
+                    <a href="{{ path('confirm_vote_edit', {'id': confirm_vote.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('confirm_vote_new') }}">Create new</a>
+{% endblock %}

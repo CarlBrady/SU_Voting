@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-LS4/wo5Z/8SLpOLHs0IbuPAGOWTx30XSoZJ8o7WKH0UJhRpjXXTpODOjfVnNjeHu" crossorigin="anonymous">
+    <style>
+        @import '/public/css/nav.css';
+    </style>
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
@@ -50,17 +53,17 @@
 
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('homepage') }}">Home<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="{{ url('vote_how') }}">How To Vote</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="{{ url('confirm_vote_default_index') }}">Scheduled Votes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="{{ url('vote_default_index') }}">Proposed Votes</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">

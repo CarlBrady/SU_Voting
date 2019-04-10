@@ -19,10 +19,31 @@ class VoteController extends AbstractController
 {
     /**
      * @Route("/", name="vote_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function index(VoteRepository $voteRepository): Response
     {
         return $this->render('vote/index.html.twig', [
+            'votes' => $voteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/how", name="vote_how", methods={"GET"})
+     */
+    public function how (VoteRepository $voteRepository): Response
+    {
+        return $this->render('vote/how.html.twig', [
+            'votes' => $voteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/default_index", name="vote_default_index", methods={"GET"})
+     */
+    public function default_index(VoteRepository $voteRepository): Response
+    {
+        return $this->render('vote/default_index.html.twig', [
             'votes' => $voteRepository->findAll(),
         ]);
     }

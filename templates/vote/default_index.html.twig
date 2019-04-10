@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vote index{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Proposed Votes</h1>
+    <br>
+    <table class="table">
+        <thead>
+        <tr class="table-active">
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Votes Up</th>
+            <th scope="col">Votes Down</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for vote in votes %}
+            <tr>
+                <td>{{ vote.Title }}</td>
+                <td>{{ vote.Description }}</td>
+                <td>{{ vote.Up }}</td>
+                <td>{{ vote.Down }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

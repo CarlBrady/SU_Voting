@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vote index{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Proposed Votes</h1>
+    <br>
+    <table class="table">
+        <thead>
+        <tr class="table-active">
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for confirm_vote in confirm_votes %}
+            <tr class="table-active">
+                <td>{{ confirm_vote.id }}</td>
+                <td>{{ confirm_vote.Title }}</td>
+                <td>{{ confirm_vote.Description }}</td>
+                <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

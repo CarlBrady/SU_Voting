@@ -28,6 +28,16 @@ class ContactController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/sent", name="contact_sent", methods={"GET"})
+     */
+    public function sent(ContactRepository $contactRepository): Response
+    {
+        return $this->render('contact/sent.html.twig', [
+            'contacts' => $contactRepository->findAll(),
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="contact_new", methods={"GET","POST"})
@@ -43,7 +53,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('contact_index');
+            return $this->redirectToRoute('contact_sent');
         }
 
         return $this->render('contact/new.html.twig', [
