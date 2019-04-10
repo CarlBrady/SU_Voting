@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vote{% endblock %}
+
+{% block body %}
+    <h1>Vote</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th scope="col">Title</th>
+            <td scope="row">{{ vote.Title }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Description</th>
+            <td>{{ vote.Description }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Up</th>
+            <td>{{ vote.Up }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Down</th>
+            <td>{{ vote.Down }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('vote_default_index') }}">back to list</a>
+{% endblock %}

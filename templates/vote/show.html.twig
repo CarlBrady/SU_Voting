@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Vote{% endblock %}
 
@@ -8,23 +8,23 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th scope="col">Id</th>
                 <td>{{ vote.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th scope="col">Title</th>
                 <td>{{ vote.Title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th scope="col">Description</th>
                 <td>{{ vote.Description }}</td>
             </tr>
             <tr>
-                <th>Up</th>
+                <th scope="col">Up</th>
                 <td>{{ vote.Up }}</td>
             </tr>
             <tr>
-                <th>Down</th>
+                <th scope="col">Down</th>
                 <td>{{ vote.Down }}</td>
             </tr>
         </tbody>
@@ -32,7 +32,4 @@
 
     <a href="{{ path('vote_index') }}">back to list</a>
 
-    <a href="{{ path('vote_edit', {'id': vote.id}) }}">edit</a>
-
-    {{ include('vote/_delete_form.html.twig') }}
 {% endblock %}

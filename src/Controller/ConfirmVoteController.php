@@ -63,6 +63,16 @@ class ConfirmVoteController extends AbstractController
     }
 
     /**
+     * @Route("/default/{id}", name="confirm_vote_show_default", methods={"GET"})
+     */
+    public function showDefault(ConfirmVote $confirmVote): Response
+    {
+        return $this->render('confirm_vote/show_default.html.twig', [
+            'confirm_vote' => $confirmVote,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="confirm_vote_show", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */

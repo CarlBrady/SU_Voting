@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}ConfirmVote{% endblock %}
 
@@ -8,7 +8,7 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th scope="col">Id</th>
                 <td>{{ confirm_vote.id }}</td>
             </tr>
             <tr>
@@ -16,11 +16,11 @@
                 <td>{{ confirm_vote.Title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th scope="col">Description</th>
                 <td>{{ confirm_vote.Description }}</td>
             </tr>
             <tr>
-                <th>Date</th>
+                <th scope="col">Date</th>
                 <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>

@@ -1,0 +1,57 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Contact{% endblock %}
+
+{% block body %}
+    <br>
+    <h2>Contact Us</h2>
+    <br>
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="form-group">
+        <i class=""></i> {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+        <small>{{ form_help(form.name) }}</small>
+
+        <div class="form-error">
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+
+        <div class="form-group">
+            <i class=""></i> {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+
+            <small>{{ form_help(form.email) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+
+
+    <div class="form-group">
+        <i class=""></i> {{ form_label(form.comment) }}
+        {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+
+        <small>{{ form_help(form.comment) }}</small>
+
+        <div class="form-error">
+            {{ form_errors(form.comment) }}
+        </div>
+
+    </div>
+
+
+    <button class="btn btn-primary">{{ button_label| default ('Save') }}</button>
+    </div>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ConfirmVote{% endblock %}
+
+{% block body %}
+    <h1>ConfirmVote</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Title</th>
+            <td>{{ confirm_vote.Title }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Description</th>
+            <td>{{ confirm_vote.Description }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Date</th>
+            <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('confirm_vote_index') }}">back to list</a>
+
+{% endblock %}

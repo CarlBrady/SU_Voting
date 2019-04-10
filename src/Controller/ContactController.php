@@ -63,6 +63,30 @@ class ContactController extends AbstractController
     }
 
     /**
+     * @Route("/new_admin", name="contact_admin", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function newAdmin(Request $request): Response
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('contact_sent');
+        }
+
+        return $this->render('admin/contact.html.twig', [
+            'contact' => $contact,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="contact_show", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */

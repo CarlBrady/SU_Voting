@@ -82,6 +82,16 @@ class VoteController extends AbstractController
             'vote' => $vote,
         ]);
     }
+    /**
+     * @Route("/default/{id}", name="vote_show_default", methods={"GET"})
+     *
+     */
+    public function showDefault(Vote $vote): Response
+    {
+        return $this->render('vote/show.html.twig', [
+            'vote' => $vote,
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="vote_edit", methods={"GET","POST"})

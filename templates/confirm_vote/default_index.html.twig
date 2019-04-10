@@ -12,15 +12,18 @@
             <th scope="col">Title</th>
             <th scope="col">Description</th>
             <th scope="col">Date</th>
+            <th scope="col">More</th>
         </tr>
         </thead>
         <tbody>
         {% for confirm_vote in confirm_votes %}
             <tr class="table-active">
-                <td>{{ confirm_vote.id }}</td>
                 <td>{{ confirm_vote.Title }}</td>
                 <td>{{ confirm_vote.Description }}</td>
                 <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('confirm_vote_show_default', {'id': confirm_vote.id}) }}">show</a>
+                </td>
             </tr>
         {% else %}
             <tr>

@@ -47,6 +47,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = [
             'username' => $request->request->get('username'),
             'password' => $request->request->get('password'),
+            'role' => $request->request->get('role'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -84,11 +85,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
-        return new RedirectResponse($this->urlGenerator->generate('login_success'));
-
+        if ('user' == $token->getUsername()) {
+            return new RedirectResponse($this->urlGenerator->generate('student_index'));
+        }else if ('admin' == $token->getUsername()) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_index'));
+        } {
+                return new RedirectResponse($this->urlGenerator->generate('homepage'));
+            }
     }
-
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate('app_login');
