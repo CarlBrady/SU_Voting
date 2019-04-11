@@ -7,7 +7,7 @@
     <h2>User</h2>
     <br>
 
-    <table class=>
+    <table class="table">
         <tbody>
             <tr class="table-active">
                 <th>Id</th>
@@ -40,9 +40,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_edit',{'id': user.id})}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Edit') }}</button></a>
+    <a href="{{ path('user_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

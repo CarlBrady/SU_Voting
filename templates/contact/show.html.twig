@@ -24,9 +24,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('contact_index') }}">back to list</a>
+    <a href="{{ path('contact_edit', {'id': contact.id})}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Edit') }}</button></a>
 
-    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
-
-    {{ include('contact/_delete_form.html.twig') }}
+    <a href="{{ path('contact_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('More') }}</button></a>
 {% endblock %}

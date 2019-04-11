@@ -28,7 +28,5 @@
     <a href="{{ path('confirm_vote_edit',{'id': confirm_vote.id})}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Edit') }}</button></a>
 
     <a href="{{ path('confirm_vote_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
-
-
-    {{ include('confirm_vote/_delete_form.html.twig') }}
+    
 {% endblock %}

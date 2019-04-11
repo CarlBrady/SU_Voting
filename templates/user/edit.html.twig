@@ -6,10 +6,8 @@
     <br>
     <h2>Edit User</h2>
     <br>
-
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
+    <table>
+    {{ include('user/_form.html.twig') }}
     {{ include('user/_delete_form.html.twig') }}
+    </table>
 {% endblock %}

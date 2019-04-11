@@ -7,9 +7,10 @@
     <h2>Edit Vote</h2>
     <br>
 
-    {{ include('vote/_form.html.twig', {'button_label': 'Update'}) }}
-
+    <table>
+        {{ include('vote/_form.html.twig') }}
+        {{ include('vote/_delete_form.html.twig') }}
+    </table>
     <a href="{{ path('vote_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 
-    {{ include('vote/_delete_form.html.twig') }}
 {% endblock %}
