@@ -1,1 +1,2 @@
-language: php
+language: php:
+php:7.3
