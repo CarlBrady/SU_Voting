@@ -20,7 +20,8 @@
                 <td>{{ vote.Title }}</td>
                 <td>{{ vote.Description }}</td>
                 <td>
-                    <a href="{{ path('vote_show_default', {'id': vote.id}) }}">show</a>
+                    <a href="{{ path('vote_show_default', {'id': vote.id})}}"><button class="btn btn-outline-info btn-sm">{{ button_label| default ('More') }}</button></a>
+
                 </td>
             </tr>
         {% else %}

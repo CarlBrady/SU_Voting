@@ -9,7 +9,7 @@
 
     {{ include('vote/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('vote_index') }}">back to list</a>
+    <a href="{{ path('vote_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 
     {{ include('vote/_delete_form.html.twig') }}
 {% endblock %}

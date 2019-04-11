@@ -11,8 +11,8 @@
         <tr class="table-active">
             <th scope="col">Title</th>
             <th scope="col">Description</th>
-            <th scope="col">Date</th>
-            <th scope="col">More</th>
+            <th scope="col">&nbspDate</th>
+            <th scope="col"> &nbsp&nbsp More</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +22,8 @@
                 <td>{{ confirm_vote.Description }}</td>
                 <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('confirm_vote_show_user', {'id': confirm_vote.id}) }}">show</a>
+                    <a href="{{ path('confirm_vote_show_user',{'id': confirm_vote.id})}}"><button class="btn btn-outline-info btn-sm">{{ button_label| default ('More') }}</button></a>
+
                 </td>
             </tr>
         {% else %}

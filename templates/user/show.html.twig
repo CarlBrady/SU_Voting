@@ -7,33 +7,33 @@
     <h2>User</h2>
     <br>
 
-    <table class="table">
+    <table class=>
         <tbody>
-            <tr>
+            <tr class="table-active">
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th>Username</th>
                 <td>{{ user.username }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th>FirstName</th>
                 <td>{{ user.firstName }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th>LastName</th>
                 <td>{{ user.lastName }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th>Password</th>
                 <td>{{ user.password }}</td>
             </tr>

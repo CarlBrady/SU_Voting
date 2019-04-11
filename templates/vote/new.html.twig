@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-group">
-        <i class=""></i> {{ form_label(form.Description) }}
+        {{ form_label(form.Description) }}
         {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
 
         <small>{{ form_help(form.Description) }}</small>
@@ -36,7 +36,7 @@
 
 
 
-    <button class="btn btn-primary">{{ button_label| default ('Save') }}</button>
+    <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Submit') }}</button>
     </div>
     </div>
     {{ form_end(form) }}

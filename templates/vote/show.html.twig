@@ -5,28 +5,34 @@
 {% block body %}
     <br>
     <h2>Vote</h2>
-    <br>
+
     <table class="table">
         <tbody>
-            <tr>
+            <tr class="table-active">
                 <th scope="col">Title</th>
                 <td>{{ vote.Title }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th scope="col">Description</th>
                 <td>{{ vote.Description }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th scope="col">Up</th>
                 <td>{{ vote.Up }}</td>
             </tr>
-            <tr>
+            <tr class="table-active">
                 <th scope="col">Down</th>
                 <td>{{ vote.Down }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('vote_index') }}">back to list</a>
+    <form method="post" action="{{ path('vote_delete', {'id': vote.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vote.id) }}">
+        <button class="btn-danger btn btn-lg">Delete</button>
+    </form>
+    <a href="{{ path('vote_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
+
 
 {% endblock %}

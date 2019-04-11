@@ -9,24 +9,24 @@
 
     <table class="table">
         <tbody>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Title</th>
             <td scope="row">{{ vote.Title }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Description</th>
             <td>{{ vote.Description }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Up</th>
             <td>{{ vote.Up }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Down</th>
             <td>{{ vote.Down }}</td>
         </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('vote_default_index') }}">back to list</a>
+    <a href="{{ path('vote_default_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 {% endblock %}

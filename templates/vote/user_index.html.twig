@@ -11,16 +11,16 @@
         <tr class="table-active">
             <th scope="col">Title</th>
             <th scope="col">Description</th>
-            <th scope="col">More</th>
+            <th scope="col">&nbsp&nbspMore</th>
         </tr>
         </thead>
         <tbody>
         {% for vote in votes %}
-            <tr>
+            <tr class="table-active">
                 <td>{{ vote.Title }}</td>
                 <td>{{ vote.Description }}</td>
                 <td>
-                    <a href="{{ path('vote_show_user', {'id': vote.id}) }}">show</a>
+                    <a href="{{ path('vote_show_user', {'id' : vote.id})}}"><button class="btn btn-outline-info btn-sm">{{ button_label| default ('More') }}</button></a>
                 </td>
             </tr>
         {% else %}

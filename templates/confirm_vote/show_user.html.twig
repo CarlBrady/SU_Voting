@@ -9,21 +9,21 @@
 
     <table class="table">
         <tbody>
-        <tr>
+        <tr class="table-active">
             <th>Title</th>
             <td>{{ confirm_vote.Title }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Description</th>
             <td>{{ confirm_vote.Description }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Date</th>
             <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
         </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('confirm_vote_user_index') }}">back to list</a>
+    <a href="{{ path('confirm_vote_user_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 
 {% endblock %}

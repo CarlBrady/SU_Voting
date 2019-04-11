@@ -4,33 +4,40 @@
 
 {% block body %}
     <br>
-    <h2>Vote</h2>
-    <br>
+    <h2>Vote &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a href="{{ path('vote_up', {'id': vote.id})}}"><button class="btn btn-outline-success btn-lg">{{ button_label| default ('For') }}</button></a>
+
+        <a href="{{ path('vote_down', {'id': vote.id})}}"><button class="btn btn-outline-danger btn-lg">{{ button_label| default ('Against') }}</button></a>
+    </h2>
+
 
     <table class="table">
         <tbody>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Title</th>
             <td scope="row">{{ vote.Title }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Description</th>
             <td>{{ vote.Description }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Up</th>
             <td>{{ vote.Up }}</td>
         </tr>
-        <tr>
+        <tr class="table-active">
             <th scope="col">Down</th>
             <td>{{ vote.Down }}</td>
         </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('vote_up', {'id': vote.id}) }}">Up this vote</a>
+    <br>
 
-    <a href="{{ path('vote_down', {'id': vote.id}) }}">Down this vote</a>
-
-    <a href="{{ path('vote_index_user') }}">back to list</a>
+    <a href="{{ path('vote_index_user')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
+    <br>
 {% endblock %}
