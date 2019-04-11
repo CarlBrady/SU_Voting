@@ -118,13 +118,12 @@ class VoteController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="vote_edit", methods={"GET","POST"})
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Vote $vote): Response
     {
         $form = $this->createForm(VoteType::class, $vote);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
@@ -136,7 +135,46 @@ class VoteController extends AbstractController
         return $this->render('vote/edit.html.twig', [
             'vote' => $vote,
             'form' => $form->createView(),
-        ]);
+        ]); }
+
+    /**
+     * @Route("/{id}/up", name="vote_up", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function voteUp(Vote $vote): Response
+    {
+
+        $up = $vote->getUp();
+
+        $up = $up + 1;
+        $vote->setUp($up);
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vote);
+        $entityManager->flush();
+
+
+    return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+    }
+
+    /**
+     * @Route("/{id}/down", name="vote_down", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function voteDown(Vote $vote): Response
+    {
+        $down = $vote->getDown();
+
+        $down = $down + 1;
+        $vote->setDown($down);
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vote);
+        $entityManager->flush();
+
+    return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
     }
 
     /**

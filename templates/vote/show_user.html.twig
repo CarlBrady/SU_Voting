@@ -28,5 +28,9 @@
         </tbody>
     </table>
 
+    <a href="{{ path('vote_up', {'id': vote.id}) }}">Up this vote</a>
+
+    <a href="{{ path('vote_down', {'id': vote.id}) }}">Down this vote</a>
+
     <a href="{{ path('vote_index_user') }}">back to list</a>
 {% endblock %}
