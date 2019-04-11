@@ -18,13 +18,13 @@
                 <a style="margin-left: 75px;"></a>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="{{ url('homepage') }}">Home</a>
+                        <a style="color: #fff;" class="nav-link" href="{{ url('student_index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="{{ url('about') }}">About</a>
+                        <a style="color: #fff;" class="nav-link" href="{{ url('student_about') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="{{ url('contact_new') }}">Contact</a>
+                        <a style="color: #fff;" class="nav-link" href="{{ url('contact_user') }}">Contact</a>
                     </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">
@@ -54,16 +54,17 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('homepage') }}">Home<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ url('confirm_vote_user_index') }}">Scheduled Votes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('vote_how') }}">How To Vote</a>
+                            <a class="nav-link" href="{{ url('vote_index_user') }}">Proposed Votes<span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('vote_new') }}">Create a Vote</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('confirm_vote_default_index') }}">Scheduled Votes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('vote_default_index') }}">Proposed Votes</a>
+                            <a class="nav-link" href="{{ url('user_index_user') }}">Students</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">

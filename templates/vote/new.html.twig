@@ -1,11 +1,46 @@
 {% extends 'baseUser.html.twig' %}
 
-{% block title %}New Vote{% endblock %}
+{% block title %}New Contact{% endblock %}
 
 {% block body %}
-    <h1>Create new Vote</h1>
+    <br>
+    <h2>New Vote</h2>
+    <br>
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
 
-    {{ include('vote/_form.html.twig') }}
+    <div class="form-group">
+        <i class=""></i> {{ form_label(form.Title) }}
+        {{ form_widget(form.Title, {'attr': {'class': 'form-control'}}) }}
 
-    <a href="{{ path('vote_index') }}">back to list</a>
+        <small>{{ form_help(form.Title) }}</small>
+
+        <div class="form-error">
+            {{ form_errors(form.Title) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <i class=""></i> {{ form_label(form.Description) }}
+        {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+
+        <small>{{ form_help(form.Description) }}</small>
+
+        <div class="form-error">
+            {{ form_errors(form.Description) }}
+        </div>
+    </div>
+
+
+
+
+    <button class="btn btn-primary">{{ button_label| default ('Save') }}</button>
+    </div>
+    </div>
+    {{ form_end(form) }}
+
+
 {% endblock %}
+

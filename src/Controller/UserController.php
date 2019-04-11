@@ -28,7 +28,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/default", name="user_default", methods={"GET"})
+     * @Route("/user", name="user_index_user", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function default(UserRepository $userRepository): Response
     {

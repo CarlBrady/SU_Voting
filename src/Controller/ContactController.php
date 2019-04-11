@@ -56,7 +56,7 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact_sent');
         }
 
-        return $this->render('contact/new.html.twig', [
+        return $this->render('student/contact.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
         ]);
@@ -81,6 +81,31 @@ class ContactController extends AbstractController
         }
 
         return $this->render('admin/contact.html.twig', [
+            'contact' => $contact,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/new_user", name="contact_user", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function newUser(Request $request): Response
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('contact_sent');
+        }
+
+        return $this->render('student/contact.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
         ]);

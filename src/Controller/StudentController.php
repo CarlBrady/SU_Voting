@@ -16,4 +16,13 @@ class StudentController extends AbstractController
     {
         return $this->render('student/index.html.twig', []);
     }
+
+    /**
+     * @Route("/student_about", name="student_about")
+     * @IsGranted("ROLE_USER")
+     */
+    public function about()
+    {
+        return $this->render('student/about.html.twig', []);
+    }
 }

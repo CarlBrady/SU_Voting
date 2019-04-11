@@ -3,12 +3,13 @@
 {% block title %}ConfirmVote index{% endblock %}
 
 {% block body %}
-    <h1>ConfirmVote index</h1>
+    <br>
+    <h2>Scheduled Votes</h2>
+    <br>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Date</th>
@@ -18,7 +19,6 @@
         <tbody>
         {% for confirm_vote in confirm_votes %}
             <tr>
-                <td>{{ confirm_vote.id }}</td>
                 <td>{{ confirm_vote.Title }}</td>
                 <td>{{ confirm_vote.Description }}</td>
                 <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>

@@ -18,7 +18,7 @@
                 <a style="margin-left: 75px;"></a>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="{{ url('admin_index') }}">Home</a>
+                        <a style="color: #fff;" class="nav-link" href="{{ url('admin_home') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a style="color: #fff;" class="nav-link" href="{{ url('admin_about') }}">About</a>
@@ -54,13 +54,14 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('admin_index') }}">Home<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ url('confirm_vote_index') }}">Votes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('vote_index') }}">Votes</a>
+                            <a class="nav-link" href="{{ url('vote_index') }}">Proposed<span class="sr-only">(current)</span></a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('user_index') }}">Students</a>
+                            <a class="nav-link" href="{{ url('user_index') }}">Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('contact_index') }}">Comments</a>

@@ -1,28 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
 {% block title %}Vote index{% endblock %}
 
 {% block body %}
     <br>
-    <h2>Scheduled Votes</h2>
+    <h2>Proposed Votes</h2>
     <br>
     <table class="table">
         <thead>
         <tr class="table-active">
             <th scope="col">Title</th>
             <th scope="col">Description</th>
-            <th scope="col">Date</th>
             <th scope="col">More</th>
         </tr>
         </thead>
         <tbody>
-        {% for confirm_vote in confirm_votes %}
-            <tr class="table-active">
-                <td>{{ confirm_vote.Title }}</td>
-                <td>{{ confirm_vote.Description }}</td>
-                <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+        {% for vote in votes %}
+            <tr>
+                <td>{{ vote.Title }}</td>
+                <td>{{ vote.Description }}</td>
                 <td>
-                    <a href="{{ path('confirm_vote_show_default', {'id': confirm_vote.id}) }}">show</a>
+                    <a href="{{ path('vote_show_user', {'id': vote.id}) }}">show</a>
                 </td>
             </tr>
         {% else %}

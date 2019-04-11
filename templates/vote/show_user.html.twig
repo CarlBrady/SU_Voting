@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
 {% block title %}Vote{% endblock %}
 
@@ -28,5 +28,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('vote_default_index') }}">back to list</a>
+    <a href="{{ path('vote_index_user') }}">back to list</a>
 {% endblock %}

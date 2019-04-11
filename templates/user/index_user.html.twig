@@ -1,28 +1,26 @@
-{% extends 'baseUser.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
 {% block body %}
     <br>
-    <h2>User index</h2>
+    <h2>Users</h2>
     <br>
 
     <table class="table">
         <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Campus</th>
-
-
-        </tr>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>UserName</th>
+            </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
-                <td>{{ user.campus }}</td>
+                <td>{{ user.username}}</td>
 
             </tr>
         {% else %}
@@ -32,4 +30,6 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <a href="{{ path('user_new') }}">Create new</a>
 {% endblock %}

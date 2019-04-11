@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
 {% block title %}Vote index{% endblock %}
 
@@ -22,7 +22,7 @@
                 <td>{{ confirm_vote.Description }}</td>
                 <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('confirm_vote_show_default', {'id': confirm_vote.id}) }}">show</a>
+                    <a href="{{ path('confirm_vote_show_user', {'id': confirm_vote.id}) }}">show</a>
                 </td>
             </tr>
         {% else %}

@@ -22,6 +22,14 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/home", name="admin_home")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function home()
+    {
+        return $this->render('admin/home.html.twig', []);
+    }
+    /**
      * @Route("/admin_about", name="admin_about")
      * @IsGranted("ROLE_ADMIN")
      */

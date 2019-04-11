@@ -39,6 +39,17 @@ class ConfirmVoteController extends AbstractController
     }
 
     /**
+     * @Route("/default_user", name="confirm_vote_user_index", methods={"GET"})
+     *  @IsGranted("ROLE_USER")
+     */
+    public function user_index(ConfirmVoteRepository $confirmVoteRepository): Response
+    {
+        return $this->render('confirm_vote/user_index.html.twig', [
+            'confirm_votes' => $confirmVoteRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="confirm_vote_new", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -79,6 +90,16 @@ class ConfirmVoteController extends AbstractController
     public function show(ConfirmVote $confirmVote): Response
     {
         return $this->render('confirm_vote/show.html.twig', [
+            'confirm_vote' => $confirmVote,
+        ]);
+    }
+    /**
+     * @Route("/user/{id}", name="confirm_vote_show_user", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function showUser(ConfirmVote $confirmVote): Response
+    {
+        return $this->render('confirm_vote/show_user.html.twig', [
             'confirm_vote' => $confirmVote,
         ]);
     }

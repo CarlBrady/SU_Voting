@@ -6,11 +6,11 @@
     <br>
 
     <h2>Contact Page</h2>
+    <br>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
+
                 <th>Name</th>
                 <th>Email</th>
                 <th>Comment</th>
@@ -20,7 +20,6 @@
         <tbody>
         {% for contact in contacts %}
             <tr>
-                <td>{{ contact.id }}</td>
                 <td>{{ contact.name }}</td>
                 <td>{{ contact.email }}</td>
                 <td>{{ contact.comment }}</td>
@@ -36,6 +35,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('contact_new') }}">Create new</a>
 {% endblock %}

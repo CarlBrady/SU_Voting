@@ -3,12 +3,12 @@
 {% block title %}Vote index{% endblock %}
 
 {% block body %}
-    <h1>Vote index</h1>
-
+    <br>
+    <h2>Proposed Votes</h2>
+    <br>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Up</th>
@@ -19,7 +19,6 @@
         <tbody>
         {% for vote in votes %}
             <tr>
-                <td>{{ vote.id }}</td>
                 <td>{{ vote.Title }}</td>
                 <td>{{ vote.Description }}</td>
                 <td>{{ vote.Up }}</td>
@@ -37,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('vote_new') }}">Create new</a>
 {% endblock %}

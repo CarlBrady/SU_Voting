@@ -19,11 +19,22 @@ class VoteController extends AbstractController
 {
     /**
      * @Route("/", name="vote_index", methods={"GET"})
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(VoteRepository $voteRepository): Response
     {
         return $this->render('vote/index.html.twig', [
+            'votes' => $voteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/user", name="vote_index_user", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function indexUser(VoteRepository $voteRepository): Response
+    {
+        return $this->render('vote/user_index.html.twig', [
             'votes' => $voteRepository->findAll(),
         ]);
     }
@@ -59,11 +70,12 @@ class VoteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($vote);
             $entityManager->flush();
 
-            return $this->redirectToRoute('vote_index');
+            return $this->redirectToRoute('vote_index_user');
         }
 
         return $this->render('vote/new.html.twig', [
@@ -74,11 +86,22 @@ class VoteController extends AbstractController
 
     /**
      * @Route("/{id}", name="vote_show", methods={"GET"})
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show(Vote $vote): Response
     {
         return $this->render('vote/show.html.twig', [
+            'vote' => $vote,
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}", name="vote_show_user", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function showUser(Vote $vote): Response
+    {
+        return $this->render('vote/show_user.html.twig', [
             'vote' => $vote,
         ]);
     }
@@ -88,7 +111,7 @@ class VoteController extends AbstractController
      */
     public function showDefault(Vote $vote): Response
     {
-        return $this->render('vote/show.html.twig', [
+        return $this->render('vote/show_default.html.twig', [
             'vote' => $vote,
         ]);
     }
