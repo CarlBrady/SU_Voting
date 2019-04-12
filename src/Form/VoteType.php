@@ -16,11 +16,12 @@ class VoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Username', TextType::class)
-            ->add('Title', TextType::class)
-            ->add('Description', TextareaType::class)
-            ->add('Up', HiddenType::class, ['data' => '0'])
-            ->add('Down', HiddenType::class, ['data' => '0'])
+            ->add('username', TextType::class)
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('up', HiddenType::class, ['data' => '0'])
+            ->add('down', HiddenType::class, ['data' => '0'])
+
 
 
         ;

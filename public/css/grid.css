@@ -1,0 +1,12 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 10% 70% 10% 10%;
+    grid-template-rows: 1fr;
+    grid-template-areas: "Vote . Up Down";
+}
+
+.Vote { grid-area: Vote; }
+
+.Up { grid-area: Up; }
+
+.Down { grid-area: Down; }

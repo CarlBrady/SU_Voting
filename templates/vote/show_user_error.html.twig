@@ -3,44 +3,57 @@
 {% block title %}Vote{% endblock %}
 
 {% block body %}
-    <br>
-    <h2>Vote &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        <a href="{{ path('vote_up', {'id': vote.id})}}"><button class="btn btn-outline-success btn-lg">{{ button_label| default ('For') }}</button></a>
-
-        <a href="{{ path('vote_down', {'id': vote.id})}}"><button class="btn btn-outline-danger btn-lg">{{ button_label| default ('Against') }}</button></a>
-    </h2>
     <div class="alert alert-dismissible alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <h4 class="alert-heading">Warning!</h4>
         <p class="mb-0">I'm sorry but it appears that you have voted already! <a href="#" class="alert-link">FAQ: How To Vote </a>.</p>
     </div>
+    <table>
+        <td>
+            <h2>Vote &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            </h2>
+        </td>
+
+        <td>
+            <a href="{{ path('vote_up', {'id':vote.id})}}"><button class="btn btn-success btn-lg disabled">{{ button_label| default ('For') }}</button></a>
+            <a href="{{ path('vote_down', {'id':vote.id})}}"><button class="btn btn-danger btn-lg disabled">{{ button_label| default ('Against') }}</button></a>
 
 
-    <table class="table">
+    </table>
+
+
+
+    <table class="table table-bordered">
         <tbody>
         <tr class="table-active">
-            <th scope="col">Title</th>
-            <td scope="row">{{ vote.Title }}</td>
+            <th scope="col">title</th>
+            <td scope="row">{{ vote.title }}</td>
         </tr>
         <tr class="table-active">
-            <th scope="col">Description</th>
-            <td>{{ vote.Description }}</td>
+            <th scope="col">description</th>
+            <td>{{ vote.description }}</td>
         </tr>
         <tr class="table-active">
-            <th scope="col">Up</th>
-            <td>{{ vote.Up }}</td>
+            <th scope="col">up</th>
+            <td>{{ vote.up }}</td>
         </tr>
         <tr class="table-active">
-            <th scope="col">Down</th>
-            <td>{{ vote.Down }}</td>
+            <th scope="col">down</th>
+            <td>{{ vote.down }}</td>
         </tr>
+        </tr>
+    ≈
         </tbody>
     </table>
 
+
+    <div class="progress bg-danger">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{ vote.Up - vote.Down }}%" aria-valuenow="{{ vote.Up }} - {{ vote.Down }} " aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
     <br>
 
     <a href="{{ path('vote_index_user')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>

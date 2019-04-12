@@ -10,4 +10,5 @@
     {{ include('user/_form.html.twig') }}
     {{ include('user/_delete_form.html.twig') }}
     </table>
+    <a href="{{ path('user_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 {% endblock %}

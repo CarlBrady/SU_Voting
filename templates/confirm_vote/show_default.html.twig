@@ -7,19 +7,19 @@
     <h2>Show Info</h2>
     <br>
 
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
         <tr class="table-active">
             <th>Title</th>
-            <td>{{ confirm_vote.Title }}</td>
+            <td>{{ confirm_vote.title }}</td>
         </tr>
         <tr class="table-active">
             <th scope="col">Description</th>
-            <td>{{ confirm_vote.Description }}</td>
+            <td>{{ confirm_vote.description }}</td>
         </tr>
         <tr class="table-active">
             <th scope="col">Date</th>
-            <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ confirm_vote.Date ? confirm_vote.date|date('Y-m-d H:i:s') : '' }}</td>
         </tr>
         </tbody>
     </table>

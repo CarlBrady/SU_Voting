@@ -6,7 +6,7 @@
     <br>
     <h2>Proposed Votes</h2>
     <br>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
         <tr class="table-active">
             <th scope="col">Title</th>
@@ -17,8 +17,8 @@
         <tbody>
         {% for vote in votes %}
             <tr class="table-active">
-                <td>{{ vote.Title }}</td>
-                <td>{{ vote.Description }}</td>
+                <td>{{ vote.title }}</td>
+                <td>{{ vote.description }}</td>
                 <td>
                     <a href="{{ path('vote_show_user', {'id' : vote.id})}}"><button class="btn btn-outline-info btn-sm">{{ button_label| default ('More') }}</button></a>
                 </td>

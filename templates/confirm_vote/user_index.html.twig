@@ -6,7 +6,7 @@
     <br>
     <h2>Scheduled Votes</h2>
     <br>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
         <tr class="table-active">
             <th scope="col">Title</th>
@@ -18,9 +18,9 @@
         <tbody>
         {% for confirm_vote in confirm_votes %}
             <tr class="table-active">
-                <td>{{ confirm_vote.Title }}</td>
-                <td>{{ confirm_vote.Description }}</td>
-                <td>{{ confirm_vote.Date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ confirm_vote.title }}</td>
+                <td>{{ confirm_vote.description }}</td>
+                <td>{{ confirm_vote.date ? confirm_vote.Date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('confirm_vote_show_user',{'id': confirm_vote.id})}}"><button class="btn btn-outline-info btn-sm">{{ button_label| default ('More') }}</button></a>
 

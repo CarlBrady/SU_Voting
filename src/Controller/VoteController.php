@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Down;
 use App\Entity\Up;
 use App\Entity\Vote;
 use App\Form\VoteType;
+use App\Form\CommentType;
 use App\Repository\VoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 /**
@@ -40,6 +43,8 @@ class VoteController extends AbstractController
             'votes' => $voteRepository->findAll(),
         ]);
     }
+
+
 
     /**
      * @Route("/how", name="vote_how", methods={"GET"})
@@ -85,6 +90,38 @@ class VoteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/new_comment", name="vote_comment", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function newComment(Request $request, AuthenticationUtils $authenticationUtils, Vote $vote): Response
+    {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $comment->setUsername($lastUsername);
+
+        $lastTitle = $vote->getTitle();
+        $comment->setVote($lastTitle);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('comment_index');
+        }
+
+        return $this->render('comment/new.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @Route("/{id}", name="vote_show", methods={"GET"})

@@ -7,26 +7,30 @@
     <h2>Vote</h2>
     <br>
 
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
         <tr class="table-active">
             <th scope="col">Title</th>
-            <td scope="row">{{ vote.Title }}</td>
+            <td scope="row">{{ vote.title }}</td>
         </tr>
         <tr class="table-active">
             <th scope="col">Description</th>
-            <td>{{ vote.Description }}</td>
+            <td>{{ vote.description }}</td>
         </tr>
         <tr class="table-active">
             <th scope="col">Up</th>
-            <td>{{ vote.Up }}</td>
+            <td>{{ vote.up }}</td>
         </tr>
         <tr class="table-active">
             <th scope="col">Down</th>
-            <td>{{ vote.Down }}</td>
+            <td>{{ vote.down }}</td>
         </tr>
         </tbody>
     </table>
+    <div class="progress bg-danger">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{ vote.Up - vote.Down }}%" aria-valuenow="{{ vote.Up }} - {{ vote.Down }} " aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <br>
 
     <a href="{{ path('vote_default_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
 {% endblock %}

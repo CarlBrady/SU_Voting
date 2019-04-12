@@ -14,9 +14,9 @@ class ConfirmVoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Title', TextType::class)
-            ->add('Description', TextareaType::class)
-            ->add('Date', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class, ['years' => range(2019,2026)])
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('date', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class, ['years' => range(2019,2026)])
         ;
     }
 
