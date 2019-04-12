@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,33 +19,28 @@ class Vote
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Title;
+    private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Description;
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $Up;
+    private $up;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $Down;
+    private $down;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Voter", mappedBy="Vote")
-     */
-    private $voters;
-
-    public function __construct()
-    {
-        $this->comments = new ArrayCollection();
-        $this->voters = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -56,85 +49,63 @@ class Vote
 
     public function getTitle(): ?string
     {
-        return $this->Title;
+        return $this->title;
     }
 
-    public function setTitle(string $Title): self
+    public function setTitle(string $title): self
     {
-        $this->Title = $Title;
+        $this->title = $title;
+
+        return $this;
+    }
+
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(string $Description): self
+    public function setDescription(string $description): self
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
 
     public function getUp(): ?int
     {
-        return $this->Up;
+        return $this->up;
     }
 
-    public function setUp(?int $Up): self
+    public function setUp(?int $up): self
     {
-        $this->Up = $Up;
+        $this->up = $up;
 
         return $this;
     }
 
     public function getDown(): ?int
     {
-        return $this->Down;
+        return $this->down;
     }
 
-    public function setDown(?int $Down): self
+    public function setDown(?int $down): self
     {
-        $this->Down = $Down;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Comments[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    /**
-     * @return Collection|Voter[]
-     */
-    public function getVoters(): Collection
-    {
-        return $this->voters;
-    }
-
-    public function addVoter(Voter $voter): self
-    {
-        if (!$this->voters->contains($voter)) {
-            $this->voters[] = $voter;
-            $voter->addVote($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVoter(Voter $voter): self
-    {
-        if ($this->voters->contains($voter)) {
-            $this->voters->removeElement($voter);
-            $voter->removeVote($this);
-        }
+        $this->down = $down;
 
         return $this;
     }
 }
+

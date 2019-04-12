@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Down;
+use App\Entity\Up;
 use App\Entity\Vote;
 use App\Form\VoteType;
 use App\Repository\VoteRepository;
@@ -106,6 +108,16 @@ class VoteController extends AbstractController
         ]);
     }
     /**
+     * @Route("/user/{id}/error", name="vote_show_user_error", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function showUserError(Vote $vote): Response
+    {
+        return $this->render('vote/show_user_error.html.twig', [
+            'vote' => $vote,
+        ]);
+    }
+    /**
      * @Route("/default/{id}", name="vote_show_default", methods={"GET"})
      *
      */
@@ -144,18 +156,64 @@ class VoteController extends AbstractController
     public function voteUp(Vote $vote): Response
     {
 
-        $up = $vote->getUp();
+        $repositoryUp = $this->getDoctrine()->getRepository(Up::class);
+        $username = $repositoryUp->findOneBy(['username' => $vote->getUsername()]);
+        $title = $repositoryUp->findOneBy(['title' => $vote->getTitle()]);
 
-        $up = $up + 1;
-        $vote->setUp($up);
+        $repositoryDown = $this->getDoctrine()->getRepository(Down::class);
+        $usernameDown = $repositoryDown->findOneBy(['username' => $vote->getUsername()]);
+        $titleDown = $repositoryDown->findOneBy(['title' => $vote->getTitle()]);
+
+        $pageUsername = $vote->getUsername();
+        $pageTitle = $vote->getTitle();
+
+        if(($title==null or $username==null) and ($titleDown!=null && $usernameDown!=null)){
 
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($vote);
-        $entityManager->flush();
+            return $this->redirectToRoute('vote_show_user_error', array('id' => $vote->getId()));
+        }
 
+       else if(($title==null or $username==null) and ($usernameDown==null or $usernameDown==null)){
 
-    return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+            $voteUp = $vote->getUp();
+            $vote->setUp($voteUp + 1);
+
+            $up = new Up();
+            $up->setTitle($vote->getTitle());
+            $up->setUsername($vote->getUsername());
+            $up->setVoteUp(+1);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($up);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+        }
+
+        else if((strcmp($pageTitle,$title->getTitle())==0) && (strcmp($pageUsername,$username->getUsername())==0)){
+
+            return $this->redirectToRoute('vote_show_user_error', array('id' => $vote->getId()));
+        }
+        else if((strcmp($pageTitle,$titleDown->getTitle())==0) && (strcmp($pageUsername,$usernameDown->getUsername())==0)){
+
+            return $this->redirectToRoute('vote_show_user_error', array('id' => $vote->getId()));
+        }
+        else {
+
+            $voteUp = $vote->getUp();
+            $vote->setUp($voteUp + 1);
+
+            $up = new Up();
+            $up->setTitle($vote->getTitle());
+            $up->setUsername($vote->getUsername());
+            $up->setVoteUp(+1);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($up);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+        }
     }
 
     /**
@@ -164,17 +222,64 @@ class VoteController extends AbstractController
      */
     public function voteDown(Vote $vote): Response
     {
-        $down = $vote->getDown();
+        $repository = $this->getDoctrine()->getRepository(Down::class);
+        $username = $repository->findOneBy(['username' => $vote->getUsername()]);
+        $title = $repository->findOneBy(['title' => $vote->getTitle()]);
 
-        $down = $down + 1;
-        $vote->setDown($down);
+        $repositoryUp = $this->getDoctrine()->getRepository(Up::class);
+        $usernameUp = $repositoryUp->findOneBy(['username' => $vote->getUsername()]);
+        $titleUp = $repositoryUp->findOneBy(['title' => $vote->getTitle()]);
+
+        $pageUsername = $vote->getUsername();
+        $pageTitle = $vote->getTitle();
+
+        if(($title==null or $username==null) and ($titleUp==null or $usernameUp==null)){
+
+            $voteDown = $vote->getDown();
+            $vote->setDown($voteDown + 1);
+
+            $down = new Down();
+            $down->setTitle($vote->getTitle());
+            $down->setUsername($vote->getUsername());
+            $down->setVoteDown(+1);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($down);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+        }
+
+        else if(($title==null or $username==null) and ($titleUp!=null && $usernameUp!=null)){
+
+            return $this->redirectToRoute('vote_show_user_error', array('id' => $vote->getId()));
+        }
 
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($vote);
-        $entityManager->flush();
+        else if((strcmp($pageTitle,$title->getTitle())==0) && (strcmp($pageUsername,$username->getUsername())==0)){
 
-    return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+            return $this->redirectToRoute('vote_show_user_error', array('id' => $vote->getId()));
+        }
+        else if((strcmp($pageTitle,$titleUp->getTitle())==0) && (strcmp($pageUsername,$usernameUp->getUsername())==0)){
+
+            return $this->redirectToRoute('vote_show_user_error', array('id' => $vote->getId()));
+        }
+        else {
+            $voteDown = $vote->getDown();
+            $vote->setDown($voteDown + 1);
+
+            $down = new Down();
+            $down->setTitle($vote->getTitle());
+            $down->setUsername($vote->getUsername());
+            $down->setVoteDown(+1);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($down);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('vote_show_user', array('id' => $vote->getId()));
+
+        }
     }
 
     /**
