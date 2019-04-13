@@ -1,4 +1,4 @@
-https://travis-ci.com/B00084475/SUVoting.svg?token=JpsKjP1oNsRGd8rDzwGK&branch=master
+[![Build Status](https://travis-ci.com/B00084475/SUVoting.svg?token=JpsKjP1oNsRGd8rDzwGK&branch=master)](https://travis-ci.com/B00084475/SUVoting)
 
 Student Union Voting Website, 
 
