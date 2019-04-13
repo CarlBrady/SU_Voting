@@ -39,7 +39,7 @@ install:
   - ./vendor/bin/simple-phpunit install
   - composer require symfony/phpunit-bridge annotations doctrine twig form validation security-csrf make server debug twig
   - composer require codeception/codeception --dev
-  - composer require composer require --dev phpunit
+  - composer require --dev phpunit
 script:
   # simple-phpunit is the PHPUnit wrapper provided by the PHPUnit Bridge component and
   # it helps with testing legacy code and deprecations (composer require symfony/phpunit-bridge)
