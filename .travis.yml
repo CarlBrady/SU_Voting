@@ -36,6 +36,7 @@ install:
   - if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --prefer-dist --no-interaction --prefer-stable --quiet; fi
   - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
   - ./vendor/bin/simple-phpunit install
+  - composer require symfony/phpunit-bridge annotations doctrine twig form validation security-csrf make server debug twig  orm-fixtures
 script:
   # simple-phpunit is the PHPUnit wrapper provided by the PHPUnit Bridge component and
   # it helps with testing legacy code and deprecations (composer require symfony/phpunit-bridge)
