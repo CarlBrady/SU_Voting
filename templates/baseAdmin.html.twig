@@ -24,12 +24,21 @@
                     <li class="nav-item">
                         <a style="color: #fff;" class="nav-link" href="{{ url('contact_admin') }}">Contact</a>
                     </li>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li class="nav-item">
                             <a style="color: #fff;" class="nav-link" href="{{ url('app_logout') }}"> Logout</a>
                         </li>
                         <li class="nav-item" >
-                            <a style="color: #fff;" class="nav-link">
+                            <a style="color: #fff;" class="nav-link" href="{{ path('admin_home') }}">
+                                <u> <strong>{{ app.user.username }}</strong></u>
+                            </a>
+                        </li>
+                    {% elseif is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a style="color: #fff;" class="nav-link" href="{{ url('app_logout') }}"> Logout</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a style="color: #fff;" class="nav-link" href="{{ path('user_index_user') }}">
                                 <u> <strong>{{ app.user.username }}</strong></u>
                             </a>
                         </li>
@@ -62,7 +71,7 @@
                             <a class="nav-link" href="{{ url('user_index') }}">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('contact_index') }}">Comments</a>
+                            <a class="nav-link" href="{{ url('contact_index') }}">Contact</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">

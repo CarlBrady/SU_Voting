@@ -27,9 +27,34 @@
         </tr>
         </tbody>
     </table>
-    <div class="progress bg-danger">
-        <div class="progress-bar bg-success" role="progressbar" style="width: {{ vote.Up - vote.Down }}%" aria-valuenow="{{ vote.Up }} - {{ vote.Down }} " aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
+    {% if vote.up > vote.down %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{((vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    {% elseif vote.up < vote.down %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{(100-(vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    {% elseif vote.up!=null and vote.down==vote.up %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{50}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+    {% elseif vote.up==null and vote.down==null %}
+
+
+    {% else %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{((vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+    {% endif %}
     <br>
 
     <a href="{{ path('vote_default_index')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>

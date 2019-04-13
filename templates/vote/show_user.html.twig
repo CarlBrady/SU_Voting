@@ -1,7 +1,7 @@
 {% extends 'baseUser.html.twig' %}
 
-{% block title %}Vote{% endblock %}
 
+{% block title %}Vote{% endblock %}
 
 {% block body %}
 
@@ -44,23 +44,48 @@
     </tr>
     <tr class="table-active">
         <th scope="col">Description</th>
-        <td>{{ vote.description }}</td>
+        <td>{{ vote.description}}</td>
     </tr>
     <tr class="table-active">
-        <th scope="col">Up</th>
-        <td>{{ vote.up }}</td>
+        <th scope="col"><img src="{{ asset('images/up.png') }}" alt="Up" height="50"/></th>
+        <td>{{vote.up}}</td>
     </tr>
     <tr class="table-active">
-        <th scope="col">Down</th>
-        <td>{{ vote.down }}</td>
+        <th scope="col"><img src="{{ asset('images/down.png') }}" alt="Down" height="50"/></th>
+        <td>{{vote.down}}</td>
     </tr>
 
     </tbody>
-</table>
-<div class="progress bg-danger">
-    <div class="progress-bar bg-success" role="progressbar" style="width: {{ vote.Up - vote.Down }}%"
-         aria-valuenow="{{ vote.Up }} - {{ vote.Down }} " aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+    </table>
+
+    {% if vote.up > vote.down %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{((vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    {% elseif vote.up < vote.down %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{(100-(vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    {% elseif vote.up!=null and vote.down==vote.up %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{50}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+    {% elseif vote.up==null and vote.down==null %}
+
+
+    {% else %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{((vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+    {% endif %}
 
 
 <br>
@@ -76,23 +101,44 @@
 <br>
 
 
-        {% for comment in vote.comments %}
-    <br>
+    {% for comment in vote.comments %}
+        {% if comment.username == "admin"%}
+            <br>
 
-        <div class="card border-info mb-3" style="max-width: 20rem;">
+            <div class="card border-warning mb-3" style="max-width: 20rem;">
 
-            <div class="card-header">
-                <table>
-                <td style="padding-right: 40px"><p class="text-white text-uppercase"> {{ comment.username }} </p></td>
-                <td><p class="text-white text-info"> {{ comment.date }}</p></td>
-                </table>
+                <div class="card-header">
+                    <table>
+                        <td style="padding-right: 40px"><p class="text-white text-uppercase"> {{ comment.username }} </p></td>
+                        <td><p class="text-white text-warning"> {{ comment.date }}</p></td>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <p class="text-white"> {{ comment.comment }}</p>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="text-white"> {{ comment.comment }}</p>
-            </div>
-        </div>
+            {% else %}
+
+                <br>
+
+                <div class="card border-info mb-3" style="max-width: 20rem;">
+
+                    <div class="card-header">
+                        <table>
+                            <td style="padding-right: 40px"><p class="text-white text-uppercase"> {{ comment.username }} </p></td>
+                            <td><p class="text-white text-info"> {{ comment.date }}</p></td>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-white"> {{ comment.comment }}</p>
+                    </div>
+                </div>
+
+
+        {% endif %}
 
     {% endfor %}
+
 
 
     {% endblock %}
