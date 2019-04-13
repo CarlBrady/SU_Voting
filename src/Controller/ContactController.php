@@ -30,6 +30,7 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/sent", name="contact_sent", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function sent(ContactRepository $contactRepository): Response
     {

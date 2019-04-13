@@ -32,6 +32,11 @@ class Comment
      */
     private $vote;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +84,20 @@ class Comment
 
         return $this;
     }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(?string $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+
 
 
 }

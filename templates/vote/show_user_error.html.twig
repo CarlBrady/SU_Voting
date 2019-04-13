@@ -30,19 +30,24 @@
     <table class="table table-bordered">
         <tbody>
         <tr class="table-active">
-            <th scope="col">title</th>
+            <th scope="col">Proposed By</th>
+            <td>{{ vote.username }}</td>
+        </tr>
+        <tr class="table-active">
+            <th scope="col">Title</th>
             <td scope="row">{{ vote.title }}</td>
         </tr>
         <tr class="table-active">
-            <th scope="col">description</th>
+            <th scope="col">Description</th>
             <td>{{ vote.description }}</td>
         </tr>
+
         <tr class="table-active">
-            <th scope="col">up</th>
+            <th scope="col">For</th>
             <td>{{ vote.up }}</td>
         </tr>
         <tr class="table-active">
-            <th scope="col">down</th>
+            <th scope="col">Against</th>
             <td>{{ vote.down }}</td>
         </tr>
         </tr>
@@ -51,11 +56,12 @@
     </table>
 
 
-    <div class="progress bg-danger">
-        <div class="progress-bar bg-success" role="progressbar" style="width: {{ vote.Up - vote.Down }}%" aria-valuenow="{{ vote.Up }} - {{ vote.Down }} " aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
+    <a href="{{ path('vote_index_user') }}">
+        <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button>
+    </a>
+    <a href="{{ path('vote_comment', {'id':vote.id}) }}">
+        <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Comment') }}</button>
+    </a>
     <br>
 
-    <a href="{{ path('vote_index_user')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button></a>
-    <br>
 {% endblock %}

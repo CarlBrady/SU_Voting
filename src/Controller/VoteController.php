@@ -70,11 +70,15 @@ class VoteController extends AbstractController
      * @Route("/new", name="vote_new", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $vote = new Vote();
         $form = $this->createForm(VoteType::class, $vote);
         $form->handleRequest($request);
+
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $vote->setUsername($lastUsername);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -104,7 +108,9 @@ class VoteController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         $comment->setUsername($lastUsername);
 
-        $lastTitle = $vote->getTitle();
+        $comment->setDate(strftime("%X, %d-%B-%Y"));
+
+        $lastTitle = $vote;
         $comment->setVote($lastTitle);
 
 
@@ -112,8 +118,9 @@ class VoteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
+            $id = $vote->getId();
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('vote_show_user',['id'=>$id]);
         }
 
         return $this->render('comment/new.html.twig', [

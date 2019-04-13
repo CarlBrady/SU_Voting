@@ -1,11 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
 {% block title %}New Comment{% endblock %}
 
 {% block body %}
-    <h1>Create new Comment</h1>
+    <br>
+    <h2>New Comment</h2>
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
 
-    {{ include('comment/_form.html.twig') }}
 
-    <a href="{{ path('comment_index') }}">back to list</a>
+    <div class="form-group">
+        {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+
+        <small>{{ form_help(form.comment) }}</small>
+
+        <div class="form-error">
+            {{ form_errors(form.comment) }}
+        </div>
+    </div>
+
+
+
+    <a href="{{ path('vote_index_user') }}">
+        <button class="btn btn-outline-info btn-lg">Back</button>
+    </a>
+    <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Submit') }}</button>
+
+
+    {{ form_end(form) }}
+
+
 {% endblock %}
