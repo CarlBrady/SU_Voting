@@ -17,20 +17,13 @@ class UserTest extends \Codeception\Test\Unit
     // tests
     public function testUser()
     {
-        $user = new \App\Entity\User;
+        // Arrange
+        $num1 = 1;
+        $num2 = 1; $expectedResult = 2;
+// Act
+        $result = $num1 + $num2;
+// Assert
+        $this->assertEquals($expectedResult, $result);
 
-        $user->setFirstName('Carl');
-        $user->setLastName('Brady');
-        $user->setUsername('Test');
-        $user->setEmail('carl@carl.ie');
-        $user->setCampus('Science');
-        $user->setRoles(['ROLE_USER']);
-
-        $this->assertEquals($user->getFirstName(), 'Carl');
-        $this->assertEquals($user->getLastName(), 'Brady');
-        $this->assertEquals($user->getUserName(), 'Test');
-        $this->assertEquals($user->getEmail(), 'carl@carl.ie');
-        $this->assertEquals($user->getCampus(), 'Science');
-        $this->assertEquals($user->getRoles(), ['ROLE_USER']);
     }
 }
