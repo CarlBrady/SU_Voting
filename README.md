@@ -7,6 +7,6 @@ Student Union Voting Website,
 
 A Web Framework Development Project.
 
-https://su4voting.frb.io/
+https://votingsite.frb.io/
 
 Carl Brady
