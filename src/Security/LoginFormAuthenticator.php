@@ -88,7 +88,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ('user' == $token->getUsername()) {
             return new RedirectResponse($this->urlGenerator->generate('student_index'));
         }else if ('admin' == $token->getUsername()) {
-            return new RedirectResponse($this->urlGenerator->generate('admin_index'));
+            return new RedirectResponse($this->urlGenerator->generate('admin_home'));
         } {
                 return new RedirectResponse($this->urlGenerator->generate('homepage'));
             }
