@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home page {% endblock %}
+{% block title %}Homepage {% endblock %}
 
 {% block body %}
     <br>
@@ -9,7 +9,7 @@
         <p class="lead">The time is now, TU Dublin's SU voting system is online!</p>
         <p></p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <a class="btn btn-primary btn-lg" href={{ path('about') }} role="button">Learn more</a>
         </p>
     </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'baseUser.html.twig' %}
 
-{% block title %}Vote{% endblock %}
+
+{% block title %}Error{% endblock %}
 
 {% block body %}
     <div class="alert alert-dismissible alert-warning">
@@ -108,7 +109,7 @@
                 <p class="text-white"> {{ comment.comment }}</p>
             </div>
         </div>
-        {% elseif comment.username matches {{ ADMIN }} %}
+        {% elseif comment.username == "ADMIN " %}
 
         {% endif %}
     {% endfor %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home page {% endblock %}
+{% block title %}Help {% endblock %}
 
 {% block body %}
     <br>
@@ -9,8 +9,26 @@
         <p class="lead">All voters must be a member of TU Dublin. All students will be given log in credentials via their
         student email. If you have any issues, please use the contact form provided.</p>
         <p></p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </p>
+
+        <button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#myModal">View FAQ</button>
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content card border-warning">
+                    <div class="modal-header card-header-title">
+                        <h4 class="modal-title card-element-title">FAQ</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-content clearfix">
+
+                            <h5 class="card-title">Voting FAQ</h5>
+                            <p class="card-text" style="color: darkgray;">All FAQ's would go here for the voting website..</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

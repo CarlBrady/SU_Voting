@@ -10,12 +10,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 /**
  * @Route("/user")
  */
 class UserController extends AbstractController
 {
+
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
     /**
      * @Route("/", name="user_index", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
@@ -47,6 +56,11 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+
+        $a = $request->request->get('password');
+        $encodedPassword = $this->passwordEncoder->encodePassword($user, $a);
+        $user->setPassword($encodedPassword);
+        $user->setRoles(['ROLE_USER']);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -81,6 +95,10 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+
+        $a = $user->getPassword();
+        $encodedPassword = $this->passwordEncoder->encodePassword($user, $a);
+        $user->setPassword($encodedPassword);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

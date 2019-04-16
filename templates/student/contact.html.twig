@@ -1,6 +1,6 @@
 {% extends 'baseUser.html.twig' %}
 
-{% block title %}New Contact{% endblock %}
+{% block title %}Contact Us{% endblock %}
 
 {% block body %}
     <br>
@@ -13,7 +13,7 @@
 
     <div class="form-group">
         <i class=""></i> {{ form_label(form.name) }}
-        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder':'Name'}}) }}
 
         <small>{{ form_help(form.name) }}</small>
 
@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <i class=""></i> {{ form_label(form.email) }}
-            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder':'E-mail'}}) }}
 
             <small>{{ form_help(form.email) }}</small>
 
@@ -36,7 +36,7 @@
 
     <div class="form-group">
         <i class=""></i> {{ form_label(form.comment) }}
-        {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'placeholder':'Comment'}}) }}
 
         <small>{{ form_help(form.comment) }}</small>
 

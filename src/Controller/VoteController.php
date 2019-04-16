@@ -9,7 +9,9 @@ use App\Entity\Vote;
 use App\Form\VoteType;
 use App\Form\CommentType;
 use App\Repository\VoteRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -79,14 +81,21 @@ class VoteController extends AbstractController
 
         $lastUsername = $authenticationUtils->getLastUsername();
         $vote->setUsername($lastUsername);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            try {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($vote);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('vote_index_user');
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($vote);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('vote_index_user');
+            }
+
+            catch
+            (UniqueConstraintViolationException $uniqueConstraintViolationException) {
+                $form->get('title')->addError(new FormError('Title already exists'));
+            }
         }
 
         return $this->render('vote/new.html.twig', [
@@ -129,6 +138,39 @@ class VoteController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/new_comment_admin", name="vote_comment_admin", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function newCommentAdmin(Request $request, AuthenticationUtils $authenticationUtils, Vote $vote): Response
+    {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $comment->setUsername($lastUsername);
+
+        $comment->setDate(strftime("%X, %d-%B-%Y"));
+
+        $lastTitle = $vote;
+        $comment->setVote($lastTitle);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $id = $vote->getId();
+
+            return $this->redirectToRoute('vote_show',['id'=>$id]);
+        }
+
+        return $this->render('comment/new_admin.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="vote_show", methods={"GET"})

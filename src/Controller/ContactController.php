@@ -30,7 +30,7 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/sent", name="contact_sent", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
+     *
      */
     public function sent(ContactRepository $contactRepository): Response
     {
@@ -38,6 +38,30 @@ class ContactController extends AbstractController
             'contacts' => $contactRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/sent_user", name="contact_sent_user", methods={"GET"})
+     *
+     */
+    public function sentUser(ContactRepository $contactRepository): Response
+    {
+        return $this->render('contact/sent_user.html.twig', [
+            'contacts' => $contactRepository->findAll(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/sent_admin", name="contact_sent_admin", methods={"GET"})
+     *
+     */
+    public function sentAdmin(ContactRepository $contactRepository): Response
+    {
+        return $this->render('contact/sent_admin.html.twig', [
+            'contacts' => $contactRepository->findAll(),
+        ]);
+    }
+
 
 
     /**
@@ -57,7 +81,7 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact_sent');
         }
 
-        return $this->render('student/contact.html.twig', [
+        return $this->render('contact/new.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
         ]);
@@ -78,7 +102,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('contact_sent');
+            return $this->redirectToRoute('contact_sent_admin');
         }
 
         return $this->render('admin/contact.html.twig', [
@@ -103,7 +127,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('contact_sent');
+            return $this->redirectToRoute('contact_sent_user');
         }
 
         return $this->render('student/contact.html.twig', [

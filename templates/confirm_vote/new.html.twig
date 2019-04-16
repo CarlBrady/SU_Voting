@@ -1,6 +1,6 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}New Contact{% endblock %}
+{% block title %}New Vote{% endblock %}
 
 {% block body %}
     <br>
@@ -24,7 +24,7 @@
 
     <div class="form-group">
         <i class=""></i> {{ form_label(form.title) }}
-        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control' , 'placeholder':'Title'}}) }}
 
         <small>{{ form_help(form.title) }}</small>
 
@@ -35,7 +35,7 @@
 
     <div class="form-group">
         <i class=""></i> {{ form_label(form.description) }}
-        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder':'Description'}}) }}
 
         <small>{{ form_help(form.description) }}</small>
 

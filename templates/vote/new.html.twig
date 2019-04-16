@@ -13,14 +13,14 @@
 
     <div class="form-group">
         <i class=""></i> {{ form_label(form.title) }}
-        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control' , 'placeholder':'Comment'}}) }}
 
         <small>{{ form_help(form.title) }}</small>
     </div>
 
     <div class="form-group">
         {{ form_label(form.description) }}
-        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder':'Comment'}}) }}
 
         <small>{{ form_help(form.description) }}</small>
 

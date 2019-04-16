@@ -73,10 +73,10 @@
 
     <br>
 
-    <a href="{{ path('vote_index_user') }}">
+    <a href="{{ path('vote_index') }}">
         <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button>
     </a>
-    <a href="{{ path('vote_comment', {'id':vote.id}) }}">
+    <a href="{{ path('vote_comment_admin', {'id':vote.id}) }}">
         <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Comment') }}</button>
     </a>
     <br>
@@ -131,6 +131,36 @@
         {% endif %}
 
     {% endfor %}
+    <br>
 
+    <a href="{{ path('vote_index_user') }}">
+        <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button>
+    </a>
+    <a href="{{ path('vote_comment', {'id':vote.id}) }}">
+        <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Comment') }}</button>
+    </a>
+    <br>
+
+
+    {% for comment in vote.comments %}
+        {% if comment.username == "ADMIN"%}
+            <br>
+
+            <div class="card border-info mb-3" style="max-width: 20rem;">
+
+                <div class="card-header">
+                    <table>
+                        <td style="padding-right: 40px"><p class="text-white text-uppercase"> {{ comment.username }} </p></td>
+                        <td><p class="text-white text-info"> {{ comment.date }}</p></td>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <p class="text-white"> {{ comment.comment }}</p>
+                </div>
+            </div>
+        {% elseif comment.username == "ADMIN " %}
+
+        {% endif %}
+    {% endfor %}
 
 {% endblock %}

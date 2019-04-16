@@ -1,6 +1,6 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}User{% endblock %}
 
 {% block body %}
     <br>
@@ -33,5 +33,7 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <a href="{{ path('user_new')}}"><button class="btn btn-outline-info btn-lg">{{ button_label| default ('New User') }}</button></a>
 
 {% endblock %}

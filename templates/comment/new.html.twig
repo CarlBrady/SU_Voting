@@ -5,6 +5,7 @@
 {% block body %}
     <br>
     <h2>New Comment</h2>
+    <br>
     {{ form_start(form) }}
     <div class="my-custom-class-for-errors">
         {{ form_errors(form) }}
@@ -12,7 +13,7 @@
 
 
     <div class="form-group">
-        {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'placeholder':'Comment'}}) }}
 
         <small>{{ form_help(form.comment) }}</small>
 
@@ -20,6 +21,7 @@
             {{ form_errors(form.comment) }}
         </div>
     </div>
+    <br>
 
 
 

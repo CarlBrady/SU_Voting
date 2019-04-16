@@ -12,7 +12,7 @@
 
 
     <div class="form-group">
-        {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'placeholder':'Comment'}}) }}
 
         <small>{{ form_help(form.comment) }}</small>
 
@@ -23,7 +23,7 @@
 
 
 
-    <a href="{{ path('vote_index_user') }}">
+    <a href="{{ path('vote_index') }}">
         <button class="btn btn-outline-info btn-lg">Back</button>
     </a>
     <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Submit') }}</button>
