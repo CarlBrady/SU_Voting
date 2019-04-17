@@ -1,0 +1,149 @@
+{% extends 'baseUser.html.twig' %}
+
+
+{% block title %}Vote{% endblock %}
+
+{% block body %}
+
+<br>
+<table>
+    <td>
+        <h2>Vote
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        </h2>
+    </td>
+
+    <td>
+        <form method="post" action="{{ path('vote_up', {'id': vote.id}) }}"
+              onsubmit="return confirm('Are you sure you agree with this proposed vote?');">
+            <button class="btn-success btn-lg">&nbsp&nbsp&nbsp&nbspFor&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+        </form>
+    <td>
+
+        <form method="post" action="{{ path('vote_down', {'id': vote.id}) }}"
+              onsubmit="return confirm('Are you sure you do not agree with this proposed vote?');">
+            <button class="btn-danger btn-lg">Against</button>
+        </form>
+
+</table>
+
+
+<table class="table table-bordered border">
+    <tbody>
+        <tr class="table-active">
+            <th scope="col">Proposed By</th>
+            <td>{{ vote.username }}</td>
+        </tr>
+        <tr class="table-active border">
+            <th scope="col">Title</th>
+            <td scope="row">{{ vote.title }}</td>
+        </tr>
+        <tr class="table-active">
+            <th scope="col">Description</th>
+            <td>{{ vote.description}}</td>
+        </tr>
+        <tr class="table-active">
+            <th scope="col"><img src="{{ asset('images/up.png') }}" alt="Up" height="50"/></th>
+            <td>{{vote.up}}</td>
+        </tr>
+        <tr class="table-active">
+            <th scope="col"><img src="{{ asset('images/down.png') }}" alt="Down" height="50"/></th>
+            <td>{{vote.down}}</td>
+        </tr>
+    </tbody>
+</table>
+
+    {% if vote.up > vote.down %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{((vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    {% elseif vote.up < vote.down %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{(100-(vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    {% elseif vote.up!=null and vote.down==vote.up %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{50}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+    {% elseif vote.up==null and vote.down==null %}
+
+
+    {% else %}
+        <div class="progress bg-danger">
+            <div class="progress-bar bg-success" role="progressbar" style="width:{{((vote.up+2 - vote.down+1)/(vote.up+2)*100)|number_format(0,'.')}}%"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+    {% endif %}
+
+
+    <br>
+
+    <a href="{{ path('vote_index_user') }}">
+        <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Back') }}</button>
+    </a>
+    <a href="{{ path('vote_comment', {'id':vote.id}) }}">
+        <button class="btn btn-outline-info btn-lg">{{ button_label| default ('Comment') }}</button>
+    </a>
+
+        <form method="post" action="{{ path('vote_delete', {'id': vote.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vote.id) }}">
+            <button class="btn-danger btn-lg">Delete</button>
+        </form>
+    <br>
+    <br>
+    <br>
+
+
+    {% for comment in vote.comments %}
+        {% if comment.username == "admin"%}
+            <br>
+
+            <div class="card border-warning mb-3" style="max-width: 20rem;">
+
+                <div class="card-header">
+                    <table>
+                        <td style="padding-right: 40px"><p class="text-white text-uppercase"> {{ comment.username }} </p></td>
+                        <td><p class="text-white text-warning"> {{ comment.date }}</p></td>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <p class="text-white"> {{ comment.comment }}</p>
+                </div>
+            </div>
+            {% else %}
+
+                <br>
+
+                <div class="card border-info mb-3" style="max-width: 20rem;">
+
+                    <div class="card-header">
+                        <table>
+                            <td style="padding-right: 40px"><p class="text-white text-uppercase"> {{ comment.username }} </p></td>
+                            <td><p class="text-white text-info"> {{ comment.date }}</p></td>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-white"> {{ comment.comment }}</p>
+                    </div>
+                </div>
+
+
+        {% endif %}
+
+    {% endfor %}
+
+
+
+    {% endblock %}

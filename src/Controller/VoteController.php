@@ -187,11 +187,19 @@ class VoteController extends AbstractController
      * @Route("/user/{id}", name="vote_show_user", methods={"GET"})
      * @IsGranted("ROLE_USER")
      */
-    public function showUser(Vote $vote): Response
+    public function showUser(Vote $vote, AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('vote/show_user.html.twig', [
-            'vote' => $vote,
-        ]);
+        $lastUsername = $authenticationUtils->getLastUsername();
+        if ($lastUsername == $vote->getUsername()){
+            return $this->render('vote/show_user_own.html.twig', [
+                'vote' => $vote,
+            ]);
+        }
+        else {
+            return $this->render('vote/show_user.html.twig', [
+                'vote' => $vote,
+            ]);
+        }
     }
     /**
      * @Route("/user/{id}/error", name="vote_show_user_error", methods={"GET"})
@@ -199,6 +207,7 @@ class VoteController extends AbstractController
      */
     public function showUserError(Vote $vote): Response
     {
+
         return $this->render('vote/show_user_error.html.twig', [
             'vote' => $vote,
         ]);
@@ -374,12 +383,33 @@ class VoteController extends AbstractController
      */
     public function delete(Request $request, Vote $vote): Response
     {
+        $repository = $this->getDoctrine()->getRepository(Comment::class);
+        $voteId = $repository->findBy(['vote' => ($vote->getId())]);
         if ($this->isCsrfTokenValid('delete'.$vote->getId(), $request->request->get('_token'))) {
+
+            $vote->getComments();
+
             $entityManager = $this->getDoctrine()->getManager();
+            foreach ($voteId as $item) {
+                $entityManager->remove($item);
+            }
             $entityManager->remove($vote);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('vote_index');
+        if($this->isGranted('ROLE_ADMIN')) {
+
+            return $this->redirectToRoute('vote_index');
+        }
+        else {
+
+            return $this->redirectToRoute('vote_index_user');
+        }
     }
+
+    /**
+     * @Route("/{id}", name="vote_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+
 }
